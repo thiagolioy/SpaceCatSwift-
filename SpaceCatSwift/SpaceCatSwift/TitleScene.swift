@@ -7,12 +7,13 @@
 //
 
 import SpriteKit
+import AVFoundation
 
 
 class TitleScene: SKScene {
 
     var pressStartSFX:SKAction?
-//    var backgroundMusic:AVAudioPlayer?
+    var backgroundMusic:AVAudioPlayer?
     
     init(size: CGSize) {
         /* Setup your scene here */
@@ -28,18 +29,16 @@ class TitleScene: SKScene {
     }
     
     func startBackgroundMusic(){
-//        self.pressStartSFX = [SKAction playSoundFileNamed:@"PressStart.caf" waitForCompletion:NO];
-        //
-        //        NSURL *url = [[NSBundle mainBundle] URLForResource:@"StartScreen" withExtension:@"mp3"];
-        //
-        //        self.backgroundMusic = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
-        //        self.backgroundMusic.numberOfLoops = -1;
-        //        [self.backgroundMusic prepareToPlay];
+        pressStartSFX = SKAction.playSoundFileNamed("PressStart.caf", waitForCompletion: false)
+        let url = NSBundle.mainBundle().URLForResource("StartScreen", withExtension: "mp3")
+        backgroundMusic = AVAudioPlayer(contentsOfURL: url, error: nil)
+        backgroundMusic!.numberOfLoops = -1
+        backgroundMusic!.prepareToPlay()
     }
     
     
     override func didMoveToView(view: SKView) {
-      
+      backgroundMusic!.play()
     }
     
     override func touchesBegan(touches: NSSet!, withEvent event: UIEvent!) {
