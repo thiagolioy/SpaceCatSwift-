@@ -42,6 +42,11 @@ class TitleScene: SKScene {
     }
     
     override func touchesBegan(touches: NSSet!, withEvent event: UIEvent!) {
-    
+        runAction(pressStartSFX)
+        backgroundMusic!.stop()
+
+        let gamePlayScene = GamePlayScene(size: self.frame.size)
+        let transition = SKTransition.fadeWithDuration(1.0)
+        self.view.presentScene(gamePlayScene, transition: transition)        
     }
 }
